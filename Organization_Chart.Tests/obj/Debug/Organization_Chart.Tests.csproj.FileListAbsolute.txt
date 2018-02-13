@@ -1,0 +1,2 @@
+C:\Users\andylou\source\repos\Organization_Chart\Organization_Chart.Tests\obj\Debug\Organization_Chart.Tests.csprojResolveAssemblyReference.cache
+C:\Users\andylou\source\repos\Organization_Chart\Organization_Chart.Tests\obj\Debug\Organization_Chart.Tests.csproj.CoreCompileInputs.cache
