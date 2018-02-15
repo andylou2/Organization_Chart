@@ -10,7 +10,7 @@ namespace Organization_Chart.Models
         public int ID { get; set; }
         public string Name { get; set; }
         public int? ParentDepartmentID { get; set; }
-        public string ParentDepartment { get; set; }
+        public Department ParentDepartment { get; set; }
         public ICollection<Employee> Employees { get; set; }
         public ICollection<DepartmentDTO> Departments { get; set; }
     }

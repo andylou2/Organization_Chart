@@ -36,7 +36,7 @@ namespace Organization_Chart.Controllers
                                        ID = dep.ID,
                                        Name = dep.Name,
                                        ParentDepartmentID = dep.ParentDepartmentID,
-                                       ParentDepartment = dep.ParentDepartment.Name,
+                                       ParentDepartment = dep.ParentDepartment,
 
                                    };
 
@@ -74,7 +74,7 @@ namespace Organization_Chart.Controllers
                                   ID = dep.ID,
                                   Name = dep.Name,
                                   ParentDepartmentID = dep.ParentDepartmentID,
-                                  ParentDepartment = dep.ParentDepartment.Name,
+                                  ParentDepartment = dep.ParentDepartment,
                                   Employees = dep.Employees
                               };
 
@@ -93,7 +93,7 @@ namespace Organization_Chart.Controllers
                     ID = dep.ID,
                     Name = dep.Name,
                     ParentDepartmentID = dep.ParentDepartmentID,
-                    ParentDepartment = dep.ParentDepartment.Name,
+                    ParentDepartment = dep.ParentDepartment,
                     Employees = dep.Employees
                 }).SingleOrDefaultAsync(x => x.ID == id);
             if (department == null)
@@ -177,7 +177,7 @@ namespace Organization_Chart.Controllers
         }
 
         // DELETE: api/Departments/5
-        [AcceptVerbs("GET", "POST")]
+        [AcceptVerbs("GET", "POST", "DELETE")]
         [Route("deletedepartment")]
         [ResponseType(typeof(Department))]
         public async Task<IHttpActionResult> DeleteDepartment(int id)
