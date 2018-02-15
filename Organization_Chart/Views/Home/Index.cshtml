@@ -65,17 +65,23 @@
             <div class="panel-heading">
                 <h2 class="panel-title">
                     Detail
-                    <small><a href="#" title="Edit Department" onClick="editDepartmentDetail()"><span class="glyphicon glyphicon-pencil" style="float:right"></span></a></small>
+                    <small><input type="checkbox" title="Edit Department" onclick="editDepartmentDetail()" data-bind="checked: editable" style="float:right"></input></small>
                     <script>
                         function editDepartmentDetail() {
-                            console.log("edditing department detail");
+                            console.log("editing department detail");
                             element = document.getElementById("updateDetails");
+                            //name = document.getElementById("deptname");
+                            //par = document.getElementById("parname");
                             ele_style = element.style;
                             if (ele_style.display == 'none') {
                                 ele_style.display = 'table-row';
+                                //name.contenteditable = 'true';
+                                //par.contenteditable = 'true';
                             }
                             else {
                                 ele_style.display = 'none';
+                                //name.contenteditable = 'false';
+                                //par.contenteditable = 'false';
                             }
                         }
                     </script>
@@ -97,7 +103,8 @@
                 </h2>
             </div>
             <table class="table">
-                <tr><td>Name</td><td data-bind="text: detail().Name"></td></tr>
+                <tr><td>Name</td><td><div data-bind="contentEditable: editable, htmlLazy: detail().Name"></div></td></tr>
+                <tr><td>Name</td><td data-bind="text: detail().Name" @*data-bind="text: detail().Name"*@></td></tr>
                 <tr><td>ID</td><td data-bind="text: detail().ID"></td></tr>
                 <tr><td>ParentDepartment</td><td data-bind="text: detail().ParentDepartment.Name"></td></tr>
                 @*<tr><td>Employees</td><td data-bind="text: detail().Employees"></td></tr>*@ @*TODO NEED TO ITERATE THROUGH EMPLOYEES AND GET NAME*@

@@ -1,4 +1,35 @@
-﻿var ViewModel = function () {
+﻿ko.bindingHandlers.htmlLazy = {
+    update: function (element, valueAccessor) {
+        var value = ko.unwrap(valueAccessor());
+
+        if (!element.isContentEditable) {
+            element.innerHTML = value;
+        }
+    }
+};
+ko.bindingHandlers.contentEditable = {
+    init: function (element, valueAccessor, allBindingsAccessor) {
+        var value = ko.unwrap(valueAccessor()),
+            htmlLazy = allBindingsAccessor().htmlLazy;
+
+        $(element).on("input", function () {
+            if (this.isContentEditable && ko.isWriteableObservable(htmlLazy)) {
+                htmlLazy(this.innerHTML);
+            }
+        });
+    },
+    update: function (element, valueAccessor) {
+        var value = ko.unwrap(valueAccessor());
+        element.contentEditable = value;
+
+        if (!element.isContentEditable) {
+            $(element).trigger("input");
+        }
+    }
+};
+
+
+var ViewModel = function () {
     var self = this;
     self.departments = ko.observableArray();
     self.error = ko.observable();
@@ -75,6 +106,8 @@
 
     // Fetch the initial data.
     getAllDepartments();
+
+    self.editable = ko.observable(false);
 };
 
 ko.applyBindings(new ViewModel());
