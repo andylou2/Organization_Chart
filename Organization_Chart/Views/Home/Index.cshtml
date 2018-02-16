@@ -65,7 +65,7 @@
             <div class="panel-heading">
                 <h2 class="panel-title">
                     Detail
-                    <small><input type="checkbox" title="Edit Department" onclick="editDepartmentDetail()" data-bind="checked: editable" style="float:right"></input></small>
+                    <small><input type="checkbox" title="Edit Department" onclick="editDepartmentDetail()" data-bind="checked: editable" style="float:right"></small>
                     <script>
                         function editDepartmentDetail() {
                             console.log("editing department detail");
@@ -104,11 +104,10 @@
             </div>
             <table class="table">
                 <tr><td>Name</td><td><div data-bind="contentEditable: editable, htmlLazy: detail().Name"></div></td></tr>
-                <tr><td>Name</td><td data-bind="text: detail().Name" @*data-bind="text: detail().Name"*@></td></tr>
                 <tr><td>ID</td><td data-bind="text: detail().ID"></td></tr>
                 <tr><td>ParentDepartment</td><td data-bind="text: detail().ParentDepartment.Name"></td></tr>
                 @*<tr><td>Employees</td><td data-bind="text: detail().Employees"></td></tr>*@ @*TODO NEED TO ITERATE THROUGH EMPLOYEES AND GET NAME*@
-                <tr id="updateDetails" style="display:none"><td><small><a href="#" title="Save Changes" data-bind="click: updateDepartmentDetail"><span class="glyphicon glyphicon-floppy-disk"></span></a></small></td></tr>
+                <tr id="updateDetails" style="display:none"><td><small><a href="#" title="Save Changes" data-bind="click: updateDepartmentDetail(detail())"><span class="glyphicon glyphicon-floppy-disk"></span></a></small></td></tr>
             </table>
         </div>
     </div>

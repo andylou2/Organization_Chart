@@ -120,7 +120,21 @@ namespace Organization_Chart.Controllers
                 return BadRequest();
             }
 
-            db.Entry(department).State = EntityState.Modified;
+            //db.Entry(department).State = EntityState.Modified;
+
+            var existingDepartment = db.Departments.Where(d => d.ID == id).FirstOrDefault<Department>();
+            var parentDepartment = db.Departments.Where(d => d.ID == department.ParentDepartmentID).FirstOrDefault<Department>();
+            if (existingDepartment != null)
+            {
+                existingDepartment.Name = department.Name;
+                existingDepartment.ParentDepartmentID = department.ParentDepartmentID;
+                existingDepartment.ParentDepartment = department.ParentDepartment;
+            }
+            else
+            {
+                return NotFound();
+            }
+            
 
             try
             {
@@ -138,7 +152,7 @@ namespace Organization_Chart.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok(existingDepartment);
         }
 
         // POST: api/Departments
@@ -204,7 +218,7 @@ namespace Organization_Chart.Controllers
             db.Departments.Remove(department);
             await db.SaveChangesAsync();
 
-            return Ok(department);
+            return Ok();
         }
 
         protected override void Dispose(bool disposing)

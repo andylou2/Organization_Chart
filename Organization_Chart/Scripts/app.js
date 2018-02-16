@@ -63,13 +63,20 @@ var ViewModel = function () {
     }
 
     self.deleteDepartment = function (item) {
+        console.log(item);
         ajaxHelper(departmentsUri + "deletedepartment?id=" + item.ID, 'DELETE').done(function (data) {
-            self.detail(data);
         });
     }
 
     self.updateDepartmentDetail = function (item) {
-        ajaxHelper(departmentsUri + "updatedepartment?id=" + item.ID, 'PUT').done(function (data) {
+        var dept = {
+            Name: item.Name(),
+            ID: item.ID(),
+            ParentDepartment: item.ParentDepartment,
+            ParentDepartmentID: item.ParentDepartmentID()
+        };
+        console.log(dept);
+        ajaxHelper(departmentsUri + "updatedepartment?id=" + item.ID, 'PUT', dept).done(function (data) {
             self.detail(data);
         });
     }
